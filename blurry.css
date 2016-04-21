@@ -6,3 +6,23 @@
   -webkit-filter: blur(1px);
   left: 1px;
 }
+
+.close-button {
+  position: fixed;
+  background: #F5F5F5;
+  top: 10px;
+  left: 10px;
+  padding: 0px 0px 0px 6px;
+  opacity: 0;
+  transition: opacity 1s;
+  cursor: pointer;
+}
+
+.close-button p {
+  color: white;
+  font-family: Helvetica;
+  font-size: 12px;
+  letter-spacing: 7px;
+  font-weight: normal;
+  margin: 0;
+}
