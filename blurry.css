@@ -1,0 +1,8 @@
+.blurry-container {
+  transition: all 3s;
+}
+
+.blur {
+  -webkit-filter: blur(1px);
+  left: 1px;
+}
