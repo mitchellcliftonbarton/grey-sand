@@ -16,6 +16,7 @@
   opacity: 0;
   transition: opacity 1s;
   cursor: pointer;
+  z-index: 10;
 }
 
 .close-button p {
@@ -25,4 +26,9 @@
   letter-spacing: 7px;
   font-weight: normal;
   margin: 0;
+}
+
+#main-canvas {
+  position: absolute;
+  top: 0px;
 }
