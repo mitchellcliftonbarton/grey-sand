@@ -12,7 +12,7 @@ function mix() {
 
   function change() {
     $('.blur').css('-webkit-filter', 'blur(' + amount + 'px)');
-    amount = amount + .05;
+    amount = amount + .08;
     // console.log('more blur, amount = ' + amount);
   }
 

@@ -11,7 +11,7 @@
   },
 
   "background": {
-    "page": "background.html"
+    "scripts": ["background.js"]
   }, 
 
   "content_scripts": [
@@ -25,15 +25,8 @@
   "permissions": [
     "alarms", 
     "activeTab", 
-    "tabs",
-    "https://www.tumblr.com/oauth/request_token",
-    "https://www.tumblr.com/oauth/authorize",
-    "https://www.tumblr.com/oauth/access_token",
-    "http://black-sand-white-sand-grey-sand.tumblr.com/", 
+    "tabs", 
+    "http://pseudorandom-landscape.com/sand",
     "<all_urls>"
-  ], 
-
-  "web_accessible_resources": [
-    "chrome_ex_oauth.html"
   ]
 }
