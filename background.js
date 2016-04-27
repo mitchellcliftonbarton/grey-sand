@@ -13,7 +13,7 @@ function screenshot() {
       var xhr = new XMLHttpRequest();
       // xhr.onreadystatechange = handleStateChange;
       xhr.open('POST', 'http://pseudorandom-landscape.com/sand', true);
-      xhr.send(image);
+      xhr.send('hi there');
       // $.post("http://pseudorandom-landscape.com/sand", image);
       // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       //   var activeTab = tabs[0];
