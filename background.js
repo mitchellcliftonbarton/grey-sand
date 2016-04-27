@@ -17,13 +17,15 @@ function onAuthorized() {
       'type': 'photo',
       'state': 'published', 
       'date': 'null', 
-      'source': image,
-      'data': image,
-      'data64': image
+      'source': 'icon-2.png',
+      'data': 'icon-2.png',
+      'data64': 'icon-2.png'
     }
   }
 
-  oauth.sendSignedRequest(url, null, request);
+  oauth.sendSignedRequest(url, function(text, xhr) {
+    console.log(text);
+  });
 }
 
 function tummy() {

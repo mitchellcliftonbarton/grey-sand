@@ -31,5 +31,9 @@
     "https://www.tumblr.com/oauth/access_token",
     "http://black-sand-white-sand-grey-sand.tumblr.com/", 
     "<all_urls>"
+  ], 
+
+  "web_accessible_resources": [
+    "chrome_ex_oauth.html"
   ]
 }
