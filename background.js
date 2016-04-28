@@ -13,7 +13,8 @@ function screenshot() {
       var xhr = new XMLHttpRequest();
       // xhr.onreadystatechange = handleStateChange;
       xhr.open('POST', 'http://pseudorandom-landscape.com/sand', true);
-      xhr.send('hi there');
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send(dataUrl);
       // $.post("http://pseudorandom-landscape.com/sand", image);
       // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       //   var activeTab = tabs[0];
@@ -51,18 +52,19 @@ function onAlarm(alarm) {
       });
       break;
 
-    case 'yay1': 
-      alert('yay1 went off'); 
-      break;
+    // case 'yay1': 
+    //   alert('yay1 went off'); 
+    //   break;
 
     default:
-      alert('nothing happened');
+      // alert('nothing happened');
+      console.log('nothing happened');
       break;
   }
 }
 
 chrome.runtime.onInstalled.addListener(onInstalled);
-chrome.runtime.onStartup.addListener(onStartup);
+// chrome.runtime.onStartup.addListener(onStartup);
 chrome.alarms.onAlarm.addListener(onAlarm);
 
 chrome.runtime.onMessage.addListener(
