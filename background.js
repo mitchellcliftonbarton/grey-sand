@@ -13,6 +13,9 @@ function onAuthorized() {
   var url = 'api.tumblr.com/v2/blog/black-sand-white-sand-grey-sand.tumblr.com/post';
   var request = {
     'method': 'POST', 
+    'headers': {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
     'body': {
       'type': 'photo',
       'state': 'published', 
@@ -75,18 +78,18 @@ function onAlarm(alarm) {
       });
       break;
 
-    case 'yay1': 
-      alert('yay1 went off'); 
-      break;
+    // case 'yay1': 
+    //   alert('yay1 went off'); 
+    //   break;
 
     default:
-      alert('nothing happened');
+      console.log('nothing');
       break;
   }
 }
 
 chrome.runtime.onInstalled.addListener(onInstalled);
-chrome.runtime.onStartup.addListener(onStartup);
+// chrome.runtime.onStartup.addListener(onStartup);
 chrome.alarms.onAlarm.addListener(onAlarm);
 
 chrome.runtime.onMessage.addListener(

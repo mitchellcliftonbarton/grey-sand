@@ -4,4 +4,5 @@
 
 window.onload = function() {
   ChromeExOAuth.initCallbackPage();
+  console.log('yep');
 }

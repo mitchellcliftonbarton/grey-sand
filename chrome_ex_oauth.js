@@ -575,6 +575,7 @@ ChromeExOAuth.prototype.getAccessToken = function(oauth_token, oauth_verifier,
 ChromeExOAuth.prototype.onAccessToken = function(callback, xhr) {
   if (xhr.readyState == 4) {
     var bg = chrome.extension.getBackgroundPage();
+    console.log('did it');
     if (xhr.status == 200) {
       var params = ChromeExOAuth.formDecode(xhr.responseText);
       var token = params["oauth_token"];
@@ -583,9 +584,11 @@ ChromeExOAuth.prototype.onAccessToken = function(callback, xhr) {
       this.setTokenSecret(secret);
       bg.chromeExOAuthRequestingAccess = false;
       callback(token, secret);
+      console.log('did it again');
     } else {
       bg.chromeExOAuthRequestingAccess = false;
       throw new Error("Fetching access token failed with status " + xhr.status);
+      console.log('pooped');
     }
   }
 };
