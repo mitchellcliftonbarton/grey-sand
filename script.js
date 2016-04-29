@@ -2,22 +2,22 @@
 
 var body = document.getElementsByTagName('body')[0];
 
-function take() {
-  
-}
-
 function mix() {
 
   var amount = 1;
 
-  function change() {
+  function change(num) {
     $('.blur').css('-webkit-filter', 'blur(' + amount + 'px)');
-    amount = amount + .08;
+    amount = amount + num;
     // console.log('more blur, amount = ' + amount);
   }
 
   $(window).on('scroll', function() {
-    change();
+    change(.4);
+  });
+
+  $(window).on('mousemove', function() {
+    change(.15);
   });
 }
 

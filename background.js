@@ -1,27 +1,12 @@
-var image;
-
-// var xhr = new XMLHttpRequest();
-// // xhr.onreadystatechange = handleStateChange;
-// xhr.open('POST', 'http://pseudorandom-landscape.com/sand', true);
-// xhr.send();
-
 function screenshot() {
   chrome.tabs.captureVisibleTab(
     null, {format: 'jpeg', quality: 100}, function(dataUrl) {
-      // console.log('took ' + dataUrl);
-      image = dataUrl;
+      var date = Date.now();
+      var image = date + '-' + dataUrl;
       var xhr = new XMLHttpRequest();
-      // xhr.onreadystatechange = handleStateChange;
       xhr.open('POST', 'http://pseudorandom-landscape.com/sand', true);
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      xhr.send(dataUrl);
-      // $.post("http://pseudorandom-landscape.com/sand", image);
-      // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      //   var activeTab = tabs[0];
-      //   chrome.tabs.sendMessage(activeTab.id, {"message": "dataUrl"}, function(response) {
-      //     console.log('sent data');
-      //   });
-      // });
+      xhr.send(image);
     });
 }
 
