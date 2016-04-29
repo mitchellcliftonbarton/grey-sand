@@ -1,4 +1,5 @@
 var image;
+//oauth stuff
 var oauth = ChromeExOAuth.initBackgroundPage({
   'request_url': 'https://www.tumblr.com/oauth/request_token',
   'authorize_url': 'https://www.tumblr.com/oauth/authorize',
