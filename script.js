@@ -1,37 +1,39 @@
 /////// CONTENT SCRIPT  
 
 var body = document.getElementsByTagName('body')[0];
+var amount = 1;
+function addImg() {
+  var newImage = document.createElement('img');
+  body.appendChild(newImage).className = 'shape img' + amount;
+
+  $.post('http://pseudorandom-landscape.com/shapes', 'i want images', function(data) {
+    newImage.src = data;
+    newImage.style.opacity = '1';
+  }); 
+}
 
 function mix() {
 
-  var amount = 1;
+  // amount = 1;
 
   function change(num) {
     $('.blur').css('-webkit-filter', 'blur(' + amount + 'px)');
     amount = amount + num;
-    // console.log('more blur, amount = ' + amount);
+    console.log(amount);
+    if (amount === 10) {
+      addImg();
+    }
   }
+
+  var amt;
 
   $(window).on('scroll', function() {
     change(.3);
+    
   });
 
   $(window).on('mousemove', function() {
-    change(.05);
-  });
-}
-
-function addImg() {
-  var newImage = document.createElement('img');
-  body.appendChild(newImage).className = 'img-1';
-
-  // newImage.src = 'icon-2.png';
-  // $.get('http://pseudorandom-landscape.com/shapes', function() {
-  //   console.log('shapez');
-  // });
-
-  $.post('http://pseudorandom-landscape.com/shapes', 'i want images', function(data) {
-    alert(data);
+    change(.03);
   });
 }
 

@@ -32,3 +32,10 @@
   position: absolute;
   top: 0px;
 }
+
+.shape {
+  position: absolute;
+  top: 0px;
+  opacity: 0;
+  transition: opacity 4s;
+}
