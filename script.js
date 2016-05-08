@@ -13,23 +13,13 @@ function addImg() {
 }
 
 function mix() {
-
-  // amount = 1;
-
   function change(num) {
     $('.blur').css('-webkit-filter', 'blur(' + amount + 'px)');
     amount = amount + num;
-    console.log(amount);
-    if (amount === 10) {
-      addImg();
-    }
   }
 
-  var amt;
-
   $(window).on('scroll', function() {
-    change(.3);
-    
+    change(.1);
   });
 
   $(window).on('mousemove', function() {
@@ -37,46 +27,35 @@ function mix() {
   });
 }
 
+var timer;
+var bl = 0;
+var nblur;
+
+function ch() {
+  nblur = $('.blur').css('-webkit-filter');
+  var fslice = nblur.indexOf('(') + 1;
+  var sslice = nblur.indexOf('px');
+  nblur = nblur.substring(fslice, sslice) * 1;
+
+  if (nblur > bl) {
+    bl = nblur;
+    console.log('it worked ' + bl + ' ' + nblur);
+    addImg();
+  } else {
+    console.log('not blurry' + bl + ' ' + nblur);
+  }
+}
+
+function check() {
+  timer = setInterval(ch, 30000);
+}
+
 function createClose() {
-  //create close button, and canvas elements
-  // var newEl = document.createElement('div');
-  // body.appendChild(newEl).className = "close-button";
-
-  // var text = document.createElement('p');
-  // var texttext = document.createTextNode('CLOSE');
-  // text.appendChild(texttext);
-  // newEl.appendChild(text);
-
-
   $(window).unload(function() {
     chrome.runtime.sendMessage({message: 'screenshot'}, function() {
       console.log('the close button was clicked, screenshot happening');
     });
-
-    // chrome.runtime.onMessage.addListener(
-    //   function(request, sender, sendResponse) {
-    //     if( request.message === "sent image" ) {
-    //       setTimeout(function() {
-    //         return console.log('finished');
-    //       }, 4000);
-          
-    //     }
-    //   }
-    // );
   });
-  // setTimeout(function() {
-  //   $('.close-button').css('opacity', '1');
-  // }, 1000);
-
-  // $()
-
-  // $('.close-button').click(function() {
-  //   // location.reload();
-  //   chrome.runtime.sendMessage({message: 'screenshot'}, function() {
-  //     console.log('the close button was clicked, screenshot happening');
-  //   });
-  //   // take();
-  // });
 }
 
 function blur() {
@@ -86,9 +65,8 @@ function blur() {
     console.log('blurred');
     mix();
     addImg();
+    check();
   }, 1000);
-
-
 }
 
 chrome.runtime.onMessage.addListener(
