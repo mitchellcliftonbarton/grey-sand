@@ -1,4 +1,4 @@
-/////// CONTENT SCRIPT  
+///// CONTENT SCRIPT  
 
 var body = document.getElementsByTagName('body')[0];
 var amount = 1;
