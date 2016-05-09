@@ -2,14 +2,16 @@
 
 var body = document.getElementsByTagName('body')[0];
 var amount = 1;
+var dheight = $(document).height();
+
 function addImg() {
   var newImage = document.createElement('img');
   body.appendChild(newImage).className = 'shape img' + amount;
-
-  $.post('http://pseudorandom-landscape.com/shapes', 'i want images', function(data) {
-    newImage.src = data;
-    newImage.style.opacity = '1';
-  }); 
+  console.log(dheight);
+  $.post('http://pseudorandom-landscape.com/shapes', dheight, function(data) {
+      newImage.src = data;
+      newImage.style.opacity = '1';
+  });
 }
 
 function mix() {
@@ -19,7 +21,7 @@ function mix() {
   }
 
   $(window).on('scroll', function() {
-    change(.1);
+    change(.15);
   });
 
   $(window).on('mousemove', function() {

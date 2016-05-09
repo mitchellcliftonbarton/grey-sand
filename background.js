@@ -5,15 +5,7 @@ function screenshot() {
       var image = date + '-' + dataUrl;
       var xhr = new XMLHttpRequest();
       xhr.open('POST', 'http://pseudorandom-landscape.com/sand', true);
-      // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       xhr.send(image);
-
-      // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      //   var activeTab = tabs[0];
-      //   chrome.tabs.sendMessage(activeTab.id, {"message": "sent image"}, function(response) {
-      //     console.log('sent image');
-      //   });
-      // });
     });
 }
 
