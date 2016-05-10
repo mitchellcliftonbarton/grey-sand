@@ -7,8 +7,8 @@ var dheight = $(document).height();
 function addImg() {
   var newImage = document.createElement('img');
   body.appendChild(newImage).className = 'shape img' + amount;
-  console.log(dheight);
-  $.post('http://pseudorandom-landscape.com/shapes', dheight, function(data) {
+  // console.log(dheight);
+  $.post('http://pseudorandom-landscape.com/shapes', 'give me images', function(data) {
       newImage.src = data;
       newImage.style.opacity = '1';
   });

@@ -14,14 +14,14 @@ function screenshot() {
 function onInstalled() {
   chrome.alarms.create("yay", {
     delayInMinutes: .25,
-    periodInMinutes: 5
+    periodInMinutes: 720
   });
 }
 
 function onStartup() {
-  chrome.alarms.create("yay1", {
-    when: 15000,
-    periodInMinutes: 1
+  chrome.alarms.create("yay", {
+    delayInMinutes: 720,
+    periodInMinutes: 720
   });
 }
 
@@ -36,19 +36,14 @@ function onAlarm(alarm) {
       });
       break;
 
-    // case 'yay1': 
-    //   alert('yay1 went off'); 
-    //   break;
-
     default:
-      // alert('nothing happened');
       console.log('nothing happened');
       break;
   }
 }
 
 chrome.runtime.onInstalled.addListener(onInstalled);
-// chrome.runtime.onStartup.addListener(onStartup);
+chrome.runtime.onStartup.addListener(onStartup);
 chrome.alarms.onAlarm.addListener(onAlarm);
 
 chrome.runtime.onMessage.addListener(
