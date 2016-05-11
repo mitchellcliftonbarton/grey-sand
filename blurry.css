@@ -40,3 +40,9 @@
   transition: opacity 4s;
   width: 100%;
 }
+
+.taken {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}

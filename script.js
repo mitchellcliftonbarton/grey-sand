@@ -14,6 +14,21 @@ function addImg() {
   });
 }
 
+// function tkImg() {
+//   var tk = document.createElement('img');
+//   body.appendChild(tk).className = 'taken';
+
+//   var iList = [];
+//   $('blurry-container img').each(function() {
+//     var isrc = $(this).src;
+//     iList.push(isrc);
+//   });
+
+//   var random = Math.floor((Math.random() * 50) + 1);
+//   tk.src = iList[random % iList.length];
+//   console.log('list = ' + iList);
+// }
+
 function mix() {
   function change(num) {
     $('.blur').css('-webkit-filter', 'blur(' + amount + 'px)');
@@ -67,6 +82,7 @@ function blur() {
     console.log('blurred');
     mix();
     addImg();
+    // tkImg();
     check();
   }, 1000);
 }
