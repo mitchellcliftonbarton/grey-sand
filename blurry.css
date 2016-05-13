@@ -42,7 +42,9 @@
 }
 
 .taken {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
+  opacity: 0;
+  transition: opacity 3s;
 }

@@ -8,26 +8,24 @@ function addImg() {
   var newImage = document.createElement('img');
   body.appendChild(newImage).className = 'shape img' + amount;
   // console.log(dheight);
-  $.post('http://pseudorandom-landscape.com/shapes', 'give me images', function(data) {
+  $.post('//pseudorandom-landscape.com/shapes', 'give me images', function(data) {
       newImage.src = data;
       newImage.style.opacity = '1';
   });
 }
 
-// function tkImg() {
-//   var tk = document.createElement('img');
-//   body.appendChild(tk).className = 'taken';
+function tkImg() {
+  var tk = document.createElement('img');
+  body.appendChild(tk).className = 'taken';
 
-//   var iList = [];
-//   $('blurry-container img').each(function() {
-//     var isrc = $(this).src;
-//     iList.push(isrc);
-//   });
+  var random = Math.floor((Math.random() * 50) + 1);
+  var images = $('body img');
 
-//   var random = Math.floor((Math.random() * 50) + 1);
-//   tk.src = iList[random % iList.length];
-//   console.log('list = ' + iList);
-// }
+  var im = images[random % images.length].src;
+  $('.taken').attr('src', im);
+  $('.taken').css('opacity', '1');
+  console.log(im);
+}
 
 function mix() {
   function change(num) {
@@ -54,7 +52,7 @@ function ch() {
   var sslice = nblur.indexOf('px');
   nblur = nblur.substring(fslice, sslice) * 1;
 
-  if (nblur > bl) {
+  if (nblur > bl + 30) {
     bl = nblur;
     console.log('it worked ' + bl + ' ' + nblur);
     addImg();
@@ -81,6 +79,7 @@ function blur() {
     $('.blurry-container').addClass('blur');
     console.log('blurred');
     mix();
+    tkImg();
     addImg();
     // tkImg();
     check();
