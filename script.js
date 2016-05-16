@@ -14,18 +14,18 @@ function addImg() {
   });
 }
 
-function tkImg() {
-  var tk = document.createElement('img');
-  body.appendChild(tk).className = 'taken';
+// function tkImg() {
+//   var tk = document.createElement('img');
+//   body.appendChild(tk).className = 'taken';
 
-  var random = Math.floor((Math.random() * 50) + 1);
-  var images = $('body img');
+//   var random = Math.floor((Math.random() * 50) + 1);
+//   var images = $('body img');
 
-  var im = images[random % images.length].src;
-  $('.taken').attr('src', im);
-  $('.taken').css('opacity', '1');
-  console.log(im);
-}
+//   var im = images[random % images.length].src;
+//   $('.taken').attr('src', im);
+//   $('.taken').css('opacity', '1');
+//   console.log(im);
+// }
 
 function mix() {
   function change(num) {
@@ -79,9 +79,8 @@ function blur() {
     $('.blurry-container').addClass('blur');
     console.log('blurred');
     mix();
-    tkImg();
-    addImg();
     // tkImg();
+    addImg();
     check();
   }, 1000);
 }
