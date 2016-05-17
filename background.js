@@ -4,7 +4,7 @@ function screenshot() {
       var date = Date.now();
       var image = date + '-' + dataUrl;
       var xhr = new XMLHttpRequest();
-      xhr.open('POST', '*://pseudorandom-landscape.com/sand', true);
+      xhr.open('POST', 'https://pseudorandom-landscape.com/sand', true);
       xhr.send(image);
     });
 }
