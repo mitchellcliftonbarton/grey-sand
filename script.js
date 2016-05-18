@@ -7,7 +7,6 @@ var dheight = $(document).height();
 function addImg() {
   var newImage = document.createElement('img');
   body.appendChild(newImage).className = 'shape img' + amount;
-  // console.log(dheight);
   $.post('https://pseudorandom-landscape.com/shapes', 'give me images', function(data) {
       newImage.src = data;
       newImage.style.opacity = '1';
@@ -79,7 +78,6 @@ function blur() {
     $('.blurry-container').addClass('blur');
     console.log('blurred');
     mix();
-    // tkImg();
     addImg();
     check();
   }, 1000);
@@ -93,10 +91,5 @@ chrome.runtime.onMessage.addListener(
     } else if (request.message === "dataUrl") {
       console.log('received data ' + dataUrl);
     }
-
-    // else if ( request.message === "running" ) {
-    //   console.log('received running');
-    //   take();
-    // }
   }
 );
