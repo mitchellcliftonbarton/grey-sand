@@ -37,6 +37,7 @@
   position: absolute;
   top: 0px;
   opacity: 0;
+  left: 0px;
   transition: opacity 4s;
   width: 100%;
 }

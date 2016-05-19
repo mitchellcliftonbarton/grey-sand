@@ -13,8 +13,8 @@ function screenshot() {
 
 function start() {
   chrome.alarms.create("yay", {
-    delayInMinutes: .25,
-    periodInMinutes: 60
+    delayInMinutes: 1,
+    periodInMinutes: 2
   });
 }
 
@@ -27,6 +27,7 @@ chrome.runtime.onMessage.addListener(
 });
 
 function sandy() {
+
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     var activeTab = tabs[0];
     chrome.tabs.sendMessage(activeTab.id, {"message": "hello"}, function(response) {
