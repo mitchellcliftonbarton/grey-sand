@@ -2,7 +2,6 @@
 
 var body = document.getElementsByTagName('body')[0];
 var amount = 1;
-var dheight = $(document).height();
 
 function addImg() {
   var newImage = document.createElement('img');
@@ -13,31 +12,18 @@ function addImg() {
   });
 }
 
-// function tkImg() {
-//   var tk = document.createElement('img');
-//   body.appendChild(tk).className = 'taken';
-
-//   var random = Math.floor((Math.random() * 50) + 1);
-//   var images = $('body img');
-
-//   var im = images[random % images.length].src;
-//   $('.taken').attr('src', im);
-//   $('.taken').css('opacity', '1');
-//   console.log(im);
-// }
-
-function mix() {
+function mix(el) {
   function change(num) {
-    $('.blur').css('-webkit-filter', 'blur(' + amount + 'px)');
+    $(el).css('-webkit-filter', 'blur(' + amount + 'px)');
     amount = amount + num;
   }
 
   $(window).on('scroll', function() {
-    change(.15);
+    change(.18);
   });
 
   $(window).on('mousemove', function() {
-    change(.03);
+    change(.04);
   });
 }
 
@@ -55,6 +41,7 @@ function ch() {
     bl = nblur;
     console.log('it worked ' + bl + ' ' + nblur);
     addImg();
+    mix('.shape:first');
   } else {
     console.log('not blurry' + bl + ' ' + nblur);
   }
@@ -77,7 +64,7 @@ function blur() {
   setTimeout(function() {
     $('.blurry-container').addClass('blur');
     console.log('blurred');
-    mix();
+    mix('.blur');
     addImg();
     check();
   }, 1000);

@@ -7,32 +7,6 @@
   left: 1px;
 }
 
-.close-button {
-  position: fixed;
-  background: #F5F5F5;
-  top: 10px;
-  left: 10px;
-  padding: 3px 0px 3px 6px;
-  opacity: 0;
-  transition: opacity 1s;
-  cursor: pointer;
-  z-index: 10;
-}
-
-.close-button p {
-  color: white;
-  font-family: Helvetica;
-  font-size: 12px;
-  letter-spacing: 7px;
-  font-weight: normal;
-  margin: 0;
-}
-
-#main-canvas {
-  position: absolute;
-  top: 0px;
-}
-
 .shape {
   position: absolute;
   top: 0px;
@@ -40,12 +14,4 @@
   left: 0px;
   transition: opacity 4s;
   width: 100%;
-}
-
-.taken {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  opacity: 0;
-  transition: opacity 3s;
 }

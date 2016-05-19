@@ -4,14 +4,16 @@
   "name": "Black Sand White Sand Grey Sand",
   "description": "An extension for art",
   "version": "1.0",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 
   "browser_action": {
     "default_icon": "icon-19.png",
-    "default_title": "Click on this I dare you!"
+    "default_title": "Black Sand White Sand Grey Sand"
   },
 
   "icons": {
     "16": "icon-16.png",
+    "32": "icon-32.png",
     "48": "icon-48.png",
     "128": "icon-128.png"
   },
@@ -32,7 +34,7 @@
     "alarms", 
     "activeTab", 
     "tabs", 
-    "http://pseudorandom-landscape.com/sand",
+    "https://pseudorandom-landscape.com/sand",
     "<all_urls>"
   ]
 }
