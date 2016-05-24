@@ -28,7 +28,7 @@ function screenshot(e) {
 function start() {
   chrome.alarms.create("yay", {
     delayInMinutes: 1,
-    periodInMinutes: 2
+    periodInMinutes: 60
   });
 }
 
