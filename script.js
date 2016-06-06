@@ -47,15 +47,30 @@ function ch() {
   }
 }
 
+function shot() {
+  chrome.runtime.sendMessage({message: 'screenshot'}, function() {
+    console.log('the close button was clicked, screenshot happening');
+  });
+}
+
 function check() {
   timer = setInterval(ch, 30000);
 }
 
 function createClose() {
+  $(document).keypress(function(e) {
+    if (e.keyCode === 67 || e.keyCode === 99) {
+      shot();
+      console.log('pressed delete ' + e.keyCode);
+      $('.blurry-container').contents().unwrap();
+      $('.shape').remove();
+    } else {
+      console.log('pressed ' + e.keyCode);
+    }
+  });
+
   $(window).unload(function() {
-    chrome.runtime.sendMessage({message: 'screenshot'}, function() {
-      console.log('the close button was clicked, screenshot happening');
-    });
+    shot();
   });
 }
 

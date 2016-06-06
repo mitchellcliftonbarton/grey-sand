@@ -20,7 +20,8 @@ function screenshot(e) {
       xhr.send(image);
     });
 
-  _gaq.push(['_trackEvent', e.target.id, 'sent an image = ' + image]);
+  // _gaq.push(['_trackEvent', e.target.id, 'sent an image = ' + image]);
+  ga('send', 'event', 'sent and image = ' + image, 'screenshotted', 'BSWSGS');
 }
 
 ///////////////////
