@@ -20,7 +20,6 @@ function screenshot(e) {
       xhr.send(image);
     });
 
-  // _gaq.push(['_trackEvent', e.target.id, 'sent an image = ' + image]);
   ga('send', 'event', 'sent and image = ' + image, 'screenshotted', 'BSWSGS');
 }
 
@@ -28,8 +27,8 @@ function screenshot(e) {
 
 function start() {
   chrome.alarms.create("yay", {
-    delayInMinutes: 1,
-    periodInMinutes: 60
+    delayInMinutes: 30,
+    periodInMinutes: 180
   });
 }
 
@@ -50,32 +49,6 @@ function sandy() {
     });
   });
 }
-
-// function onStartup() {
-//   chrome.alarms.create("yay", {
-//     delayInMinutes: 720,
-//     periodInMinutes: 720
-//   });
-// }
-
-
-
-// function onAlarm(alarm) {
-//   switch (alarm.name) {
-//     case 'yay': 
-//       chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//         var activeTab = tabs[0];
-//         chrome.tabs.sendMessage(activeTab.id, {"message": "hello"}, function(response) {
-//           console.log('i think it went');
-//         });
-//       });
-//       break;
-
-//     default:
-//       console.log('nothing happened');
-//       break;
-//   }
-// }
 
 chrome.runtime.onInstalled.addListener(start);
 chrome.runtime.onStartup.addListener(start);

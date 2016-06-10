@@ -37,7 +37,7 @@ function ch() {
   var sslice = nblur.indexOf('px');
   nblur = nblur.substring(fslice, sslice) * 1;
 
-  if (nblur > bl + 30) {
+  if (nblur > bl + 10) {
     bl = nblur;
     console.log('it worked ' + bl + ' ' + nblur);
     addImg();
@@ -54,7 +54,7 @@ function shot() {
 }
 
 function check() {
-  timer = setInterval(ch, 30000);
+  timer = setInterval(ch, 10000);
 }
 
 function createClose() {
