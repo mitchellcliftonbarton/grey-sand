@@ -1,179 +1,76 @@
-/////// CONTENT SCRIPT
-
-var CAPTURE_DELAY = 150;
-
-function take() {
-  function onMessage(request, sender, callback) {
-      if (request.msg === 'scrollPage') {
-          getPositions(callback);
-      } else {
-          console.error('Unknown message received from background: ' + request.msg);
-      }
-  }
-
-  if (!window.hasScreenCapturePage) {
-      window.hasScreenCapturePage = true;
-      chrome.extension.onRequest.addListener(onMessage);
-  }
-
-  function max(nums) {
-      return Math.max.apply(Math, nums.filter(function(x) { return x; }));
-  }
-
-  function getPositions(callback) {
-      var body = document.body,
-          widths = [
-              document.documentElement.clientWidth,
-              document.body.scrollWidth,
-              document.documentElement.scrollWidth,
-              document.body.offsetWidth,
-              document.documentElement.offsetWidth
-          ],
-          heights = [
-              document.documentElement.clientHeight,
-              document.body.scrollHeight,
-              document.documentElement.scrollHeight,
-              document.body.offsetHeight,
-              document.documentElement.offsetHeight
-          ],
-          fullWidth = max(widths),
-          fullHeight = max(heights),
-          windowWidth = window.innerWidth,
-          windowHeight = window.innerHeight,
-          originalX = window.scrollX,
-          originalY = window.scrollY,
-          originalOverflowStyle = document.documentElement.style.overflow,
-          arrangements = [],
-          // pad the vertical scrolling to try to deal with
-          // sticky headers, 250 is an arbitrary size
-          scrollPad = 200,
-          yDelta = windowHeight - (windowHeight > scrollPad ? scrollPad : 0),
-          xDelta = windowWidth,
-          yPos = fullHeight - windowHeight,
-          xPos,
-          numArrangements;
-
-      // During zooming, there can be weird off-by-1 types of things...
-      if (fullWidth <= xDelta + 1) {
-          fullWidth = xDelta;
-      }
-
-      // Disable all scrollbars. We'll restore the scrollbar state when we're done
-      // taking the screenshots.
-      document.documentElement.style.overflow = 'hidden';
-
-      while (yPos > -yDelta) {
-          xPos = 0;
-          while (xPos < fullWidth) {
-              arrangements.push([xPos, yPos]);
-              xPos += xDelta;
-          }
-          yPos -= yDelta;
-      }
-
-      /** * /
-      console.log('fullHeight', fullHeight, 'fullWidth', fullWidth);
-      console.log('windowWidth', windowWidth, 'windowHeight', windowHeight);
-      console.log('xDelta', xDelta, 'yDelta', yDelta);
-      var arText = [];
-      arrangements.forEach(function(x) { arText.push('['+x.join(',')+']'); });
-      console.log('arrangements', arText.join(', '));
-      /**/
-
-      numArrangements = arrangements.length;
-
-      function cleanUp() {
-          document.documentElement.style.overflow = originalOverflowStyle;
-          window.scrollTo(originalX, originalY);
-      }
-
-      (function processArrangements() {
-          if (!arrangements.length) {
-              cleanUp();
-              if (callback) {
-                  callback();
-              }
-              return;
-          }
-
-          var next = arrangements.shift(),
-              x = next[0], y = next[1];
-
-          window.scrollTo(x, y);
-
-          var data = {
-              msg: 'capturePage',
-              x: window.scrollX,
-              y: window.scrollY,
-              complete: (numArrangements-arrangements.length)/numArrangements,
-              totalWidth: fullWidth,
-              totalHeight: fullHeight,
-              devicePixelRatio: window.devicePixelRatio
-          };
-
-          // Need to wait for things to settle
-          window.setTimeout(function() {
-              // In case the below callback never returns, cleanup
-              var cleanUpTimeout = window.setTimeout(cleanUp, 1250);
-
-              chrome.extension.sendRequest(data, function(captured) {
-                  window.clearTimeout(cleanUpTimeout);
-                  if (captured) {
-                      // Move on to capture next arrangement.
-                      processArrangements();
-                  } else {
-                      // If there's an error in popup.js, the response value can be
-                      // undefined, so cleanup
-                      cleanUp();
-                  }
-              });
-
-          }, CAPTURE_DELAY);
-      })();
-  }
-}
-
-
-////////////// MY STUFF
+///// CONTENT SCRIPT  
 
 var body = document.getElementsByTagName('body')[0];
+var amount = 1;
 
-function mix() {
-
-  var amount = 1;
-
-  function change() {
-    $('.blur').css('-webkit-filter', 'blur(' + amount + 'px)');
-    amount = amount + .05;
-    console.log('more blur, amount = ' + amount);
-  }
-
-  $(window).on('scroll', function() {
-    change();
+function addImg() {
+  var newImage = document.createElement('img');
+  body.appendChild(newImage).className = 'shape img' + amount;
+  $.post('https://pseudorandom-landscape.com/shapes', 'give me images', function(data) {
+      newImage.src = data;
+      newImage.style.opacity = '1';
   });
 }
 
+function mix(el) {
+  function change(num) {
+    $(el).css('-webkit-filter', 'blur(' + amount + 'px)');
+    amount = amount + num;
+  }
+
+  $(window).on('scroll', function() {
+    change(.18);
+  });
+
+  $(window).on('mousemove', function() {
+    change(.04);
+  });
+}
+
+var timer;
+var bl = 0;
+var nblur;
+
+function ch() {
+  nblur = $('.blur').css('-webkit-filter');
+  var fslice = nblur.indexOf('(') + 1;
+  var sslice = nblur.indexOf('px');
+  nblur = nblur.substring(fslice, sslice) * 1;
+
+  if (nblur > bl + 10) {
+    bl = nblur;
+    console.log('it worked ' + bl + ' ' + nblur);
+    addImg();
+    mix('.shape:first');
+  } else {
+    console.log('not blurry' + bl + ' ' + nblur);
+  }
+}
+
+function shot() {
+  chrome.runtime.sendMessage({message: 'screenshot'}, function() {
+    console.log('the close button was clicked, screenshot happening');
+  });
+}
+
+function check() {
+  timer = setInterval(ch, 10000);
+}
+
 function createClose() {
-  ///create close button, and canvas elements
-  var newEl = document.createElement('div');
-  body.appendChild(newEl).className = "close-button";
+  $(document).keypress(function(e) {
+    if (e.keyCode === 67 || e.keyCode === 99) {
+      shot();
+      console.log('pressed delete ' + e.keyCode);
+      $('.blurry-container').contents().unwrap();
+      $('.shape').remove();
+    } else {
+      console.log('pressed ' + e.keyCode);
+    }
+  });
 
-  var text = document.createElement('p');
-  var texttext = document.createTextNode('CLOSE');
-  text.appendChild(texttext);
-  newEl.appendChild(text);
-
-
-
-  setTimeout(function() {
-    $('.close-button').css('opacity', '1');
-  }, 1000);
-
-  $('.close-button').click(function() {
-    // location.reload();
-    chrome.runtime.sendMessage({message: 'screenshot'}, function() {
-      console.log('the close button was clicked, screenshot happening');
-    });
+  $(window).unload(function() {
+    shot();
   });
 }
 
@@ -182,10 +79,10 @@ function blur() {
   setTimeout(function() {
     $('.blurry-container').addClass('blur');
     console.log('blurred');
-    mix();
+    mix('.blur');
+    addImg();
+    check();
   }, 1000);
-
-
 }
 
 chrome.runtime.onMessage.addListener(
@@ -193,9 +90,8 @@ chrome.runtime.onMessage.addListener(
     if( request.message === "hello" ) {
       blur();
       createClose();
-    } else if ( request.message === "running" ) {
-      console.log('received running');
-      take();
+    } else if (request.message === "dataUrl") {
+      console.log('received data ' + dataUrl);
     }
   }
 );
