@@ -1,29 +1,32 @@
-///// CONTENT SCRIPT  
+///// CONTENT SCRIPT
 
 var body = document.getElementsByTagName('body')[0];
 var amount = 1;
 
-function addImg() {
-  var newImage = document.createElement('img');
-  body.appendChild(newImage).className = 'shape img' + amount;
-  $.post('https://pseudorandom-landscape.com/shapes', 'give me images', function(data) {
-      newImage.src = data;
-      newImage.style.opacity = '1';
-  });
-}
-
-function mix(el) {
+function mix(el, scroll, move) {
   function change(num) {
     $(el).css('-webkit-filter', 'blur(' + amount + 'px)');
     amount = amount + num;
   }
 
   $(window).on('scroll', function() {
-    change(.18);
+    change(scroll);
   });
 
   $(window).on('mousemove', function() {
-    change(.04);
+    change(move);
+  });
+}
+
+function addImg() {
+  var newImage = document.createElement('img');
+  var am = Math.floor(amount);
+  var cls = 'shape img' + am;
+  var mxcls = ".img" + am;
+  body.appendChild(newImage).className = cls;
+  $.post('https://pseudorandom-landscape.com/shapes', 'give me images', function(data) {
+      newImage.src = data;
+      newImage.style.opacity = '1';
   });
 }
 
@@ -41,7 +44,7 @@ function ch() {
     bl = nblur;
     console.log('it worked ' + bl + ' ' + nblur);
     addImg();
-    mix('.shape:first');
+    mix('.shape:nth-last-child(2)', .1, .05);
   } else {
     console.log('not blurry' + bl + ' ' + nblur);
   }
@@ -59,9 +62,13 @@ function check() {
 
 function createClose() {
   $(document).keypress(function(e) {
-    if (e.keyCode === 67 || e.keyCode === 99) {
+    if (e.keyCode === 83 || e.keyCode === 115) {
       shot();
       console.log('pressed delete ' + e.keyCode);
+      $('.blurry-container').contents().unwrap();
+      $('.shape').remove();
+    } else if (e.keyCode === 67 || e.keycode === 99) {
+      console.log('pressed delete without save' + e.keyCode);
       $('.blurry-container').contents().unwrap();
       $('.shape').remove();
     } else {
@@ -79,7 +86,7 @@ function blur() {
   setTimeout(function() {
     $('.blurry-container').addClass('blur');
     console.log('blurred');
-    mix('.blur');
+    mix('.blur', .18, .04);
     addImg();
     check();
   }, 1000);
