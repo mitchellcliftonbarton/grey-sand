@@ -4,7 +4,7 @@
   "name": "Black Sand White Sand Grey Sand",
   "short_name": "BSWSGS",
   "description": "An extension for art",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 
   "browser_action": {

@@ -57,7 +57,7 @@ function shot() {
 }
 
 function check() {
-  timer = setInterval(ch, 18000);
+  timer = setInterval(ch, 22000);
 }
 
 function createClose() {
