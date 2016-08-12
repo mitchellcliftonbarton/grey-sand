@@ -44,7 +44,7 @@ function ch() {
     bl = nblur;
     console.log('it worked ' + bl + ' ' + nblur);
     addImg();
-    mix('.shape:nth-last-child(2)', .1, .05);
+    mix('.shape:nth-last-child(2)', .6, .5);
   } else {
     console.log('not blurry' + bl + ' ' + nblur);
   }
@@ -86,7 +86,7 @@ function blur() {
   setTimeout(function() {
     $('.blurry-container').addClass('blur');
     console.log('blurred');
-    mix('.blur', .18, .04);
+    mix('.blur', .7, .6);
     addImg();
     check();
   }, 1000);
