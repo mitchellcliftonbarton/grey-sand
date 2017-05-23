@@ -26,7 +26,7 @@ function addImg() {
   body.appendChild(newImage).className = cls;
   $.post('https://pseudorandom-landscape.com/shapes', 'give me images', function(data) {
       newImage.src = data;
-      newImage.style.opacity = '1';
+      newImage.style.opacity = '.85';
   });
 }
 
@@ -44,7 +44,7 @@ function ch() {
     bl = nblur;
     console.log('it worked ' + bl + ' ' + nblur);
     addImg();
-    mix('.shape:nth-last-child(2)', .9, .9);
+    mix('.shape:nth-last-child(2)', .95, .95);
   } else {
     console.log('not blurry' + bl + ' ' + nblur);
   }
@@ -86,7 +86,7 @@ function blur() {
   setTimeout(function() {
     $('.blurry-container').addClass('blur');
     console.log('blurred');
-    mix('.blur', .95, .95);
+    mix('.blur', .99, .99);
     addImg();
     check();
   }, 1000);
