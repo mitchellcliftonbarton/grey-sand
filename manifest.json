@@ -4,7 +4,7 @@
   "name": "Black Sand White Sand Grey Sand",
   "short_name": "BSWSGS",
   "description": "An extension for art",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 
   "browser_action": {
@@ -21,7 +21,7 @@
 
   "background": {
     "scripts": ["background.js"]
-  }, 
+  },
 
   "content_scripts": [
     {
@@ -29,12 +29,12 @@
       "css": ["blurry.css"],
       "js": ["jquery-2.2.3.min.js", "script.js"]
     }
-  ], 
+  ],
 
   "permissions": [
-    "alarms", 
-    "activeTab", 
-    "tabs", 
+    "alarms",
+    "activeTab",
+    "tabs",
     "https://pseudorandom-landscape.com/sand",
     "<all_urls>"
   ]
