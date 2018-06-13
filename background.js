@@ -27,8 +27,8 @@ function screenshot(e) {
 
 function start() {
   chrome.alarms.create("yay", {
-    delayInMinutes: 30,
-    periodInMinutes: 180
+    delayInMinutes: 200,
+    periodInMinutes: 240
   });
 }
 
@@ -48,11 +48,12 @@ function sandy() {
       console.log('i think it went');
     });
   });
+
+  chrome.alarms.getAll(function(alarms) {
+    console.log(alarms);
+  });
 }
 
 chrome.runtime.onInstalled.addListener(start);
-chrome.runtime.onStartup.addListener(start);
+
 chrome.alarms.onAlarm.addListener(sandy);
-
-
-
