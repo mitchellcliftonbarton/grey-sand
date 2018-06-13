@@ -1,4 +1,4 @@
-///// CONTENT SCRIPT  
+///// CONTENT SCRIPT
 
 var body = document.getElementsByTagName('body')[0];
 var amount = 1;
@@ -8,7 +8,7 @@ function addImg() {
   body.appendChild(newImage).className = 'shape img' + amount;
   $.post('https://pseudorandom-landscape.com/shapes', 'give me images', function(data) {
       newImage.src = data;
-      newImage.style.opacity = '1';
+      newImage.style.opacity = '0.8';
   });
 }
 
@@ -19,11 +19,11 @@ function mix(el) {
   }
 
   $(window).on('scroll', function() {
-    change(.18);
+    change(.24);
   });
 
   $(window).on('mousemove', function() {
-    change(.04);
+    change(.09);
   });
 }
 
@@ -37,7 +37,7 @@ function ch() {
   var sslice = nblur.indexOf('px');
   nblur = nblur.substring(fslice, sslice) * 1;
 
-  if (nblur > bl + 10) {
+  if (nblur > bl + 9) {
     bl = nblur;
     console.log('it worked ' + bl + ' ' + nblur);
     addImg();
@@ -54,7 +54,7 @@ function shot() {
 }
 
 function check() {
-  timer = setInterval(ch, 10000);
+  timer = setInterval(ch, 9500);
 }
 
 function createClose() {
