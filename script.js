@@ -1,7 +1,7 @@
 ///// CONTENT SCRIPT
 
 var body = document.body;
-var amount = 1;
+var amount = 1.4;
 
 function mix(el, scroll, move) {
   function change(num) {
@@ -18,24 +18,24 @@ function mix(el, scroll, move) {
   })
 }
 
-function addImg() {
-  var newImage = document.createElement('img');
-  var am = Math.floor(amount);
-  var cls = 'shape img' + am;
-  var mxcls = ".img" + am;
-  body.appendChild(newImage).className = cls;
-
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'https://pseudorandom-landscape.com/shapes', true)
-  xhr.send('give me images')
-
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4) {
-      newImage.src = xhr.response;
-      newImage.style.opacity = '.7';
-    }
-  }
-}
+// function addImg() {
+//   var newImage = document.createElement('img');
+//   var am = Math.floor(amount);
+//   var cls = 'shape img' + am;
+//   var mxcls = ".img" + am;
+//   body.appendChild(newImage).className = cls;
+//
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('POST', 'https://pseudorandom-landscape.com/shapes', true)
+//   xhr.send('give me images')
+//
+//   xhr.onreadystatechange = function() {
+//     if (xhr.readyState === 4) {
+//       newImage.src = xhr.response;
+//       newImage.style.opacity = '.7';
+//     }
+//   }
+// }
 
 var timer;
 var bl = 0;
@@ -105,7 +105,7 @@ function blur() {
     document.querySelector('.blurry-container').classList.add('blur');
     console.log('blurred');
     mix('.blur', 1.55, 1.55);
-    addImg();
+    // addImg();
     // check();
   }, 1000);
 }
